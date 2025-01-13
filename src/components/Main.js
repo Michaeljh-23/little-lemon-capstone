@@ -1,17 +1,24 @@
 const Main = () => {
   return (
     <main>
-      <div className="grid green height-holder">
-        <div className="half flex flex-col">
-          <h1>Little Lemon</h1>
-          <h3>Chicago</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-        </div>
-        <div className="half flex center-flex">
-          <img src="restaurant.jpg" className="center-img" />
+      <div className="green">
+        <div class="container">
+          <div class="image-column">
+            <img src="restaurant.jpg" alt="Interior" className="center-img" />
+          </div>
+          <div class="text-column">
+            <h1 className="title">Little Lemon</h1>
+            <div className="gap-4">
+              <h3>Chicago</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor. Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </main>

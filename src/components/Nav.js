@@ -1,7 +1,7 @@
 const Nav = () => {
   return (
     <nav className="nav">
-      <ul className="nav-list">
+      {/* <ul className="nav-list">
         <li>
           <a href="/" className="green-text">
             Home
@@ -27,12 +27,11 @@ const Nav = () => {
             Order Online
           </a>
         </li>
-        <li>
-          <a href="/" className="green-text">
-            Login
-          </a>
-        </li>
-      </ul>
+      </ul> */}
+      {/* <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/booking" element={<BookingPage />}></Route>
+      </Routes> */}
     </nav>
   );
 };
