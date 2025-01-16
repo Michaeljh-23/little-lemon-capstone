@@ -1,16 +1,24 @@
+import React from "react";
 import "./App.css";
 import Header from "./components/Header";
-import Main from "./components/Main";
-import React from "react";
 import Footer from "./components/Footer";
+import Layout from "./components/Layout";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import BookingPage from "./pages/BookingPage";
 
 function App() {
   return (
-    <React.Fragment className="App">
+    <div className="App">
       <Header />
-      <Main />
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/booking" element={<BookingPage />} />
+        </Routes>
+      </Layout>
       <Footer />
-    </React.Fragment>
+    </div>
   );
 }
 

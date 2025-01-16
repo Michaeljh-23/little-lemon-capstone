@@ -1,37 +1,64 @@
+import React, { useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import AlertDialougue from "./AlertDialogue";
+
 const Nav = () => {
+  const location = useLocation();
+
+  function openAlert() {
+    const alertContainer = document.getElementById("alert-container");
+    alertContainer.classList.add("visible");
+  }
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      } else {
+        console.warn(`No element found for ${location.hash}`);
+      }
+    }
+  }, [location]);
   return (
     <nav className="nav">
-      {/* <ul className="nav-list">
+      <ul className="nav-list">
         <li>
-          <a href="/" className="green-text">
+          <NavLink to="/" className="green-text" activeClassName="active">
             Home
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/" className="green-text">
+          <NavLink to="/#about" className="green-text" activeClassName="active">
             About
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/" className="green-text">
+          <NavLink to="/#menu" className="green-text" activeClassName="active">
             Menu
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/" className="green-text">
+          <NavLink
+            to="/booking"
+            className="green-text"
+            activeClassName="active"
+          >
             Reservations
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/" className="green-text">
+          <NavLink
+            to="/#orderonline"
+            className="green-text"
+            activeClassName="active"
+            onClick={openAlert}
+          >
             Order Online
-          </a>
+          </NavLink>
         </li>
-      </ul> */}
-      {/* <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route path="/booking" element={<BookingPage />}></Route>
-      </Routes> */}
+      </ul>
+      <AlertDialougue />
     </nav>
   );
 };
