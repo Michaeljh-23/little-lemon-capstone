@@ -1,38 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 
 const Booking = () => {
   const today = new Date().toISOString().split("T")[0];
+  const [submitted, setSubmitted] = useState(false);
+  const [date, setDate] = useState(today);
+  const [timeOptions, setTimeOptions] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    date: today,
+    date: date,
     time: "12:00",
     guests: 1,
     occasion: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+
+  const updateTimes = (e) => {
+    const selectedDate =
+      e === undefined ? new Date() : new Date(e.target.value);
+    const availableTimes = window.fetchAPI(selectedDate);
+    setDate(selectedDate.toISOString().split("T")[0]);
+    setTimeOptions(availableTimes);
+  };
 
   const handleSubmit = (values) => {
     setSubmitted(true);
+    setTimeout(() => {
+      window.submitAPI(formData);
+    }, 1500);
   };
-  const generateTimeOptions = () => {
-    return Array.from({ length: 24 * 4 }, (_, i) => {
-      const hour = String(Math.floor(i / 4)).padStart(2, "0");
-      const minutes = String((i % 4) * 15).padStart(2, "0");
-      return `${hour}:${minutes}`;
-    });
-  };
-
-  const [timeOptions, setTimeOptions] = useState(generateTimeOptions());
-
-  const updateTimes = () => {
-    const randomSubset = timeOptions.filter(() => Math.random() > 0.5);
-    setTimeOptions(
-      randomSubset.length > 0 ? randomSubset : generateTimeOptions()
-    );
-  };
-
+  useEffect(() => {
+    updateTimes();
+  }, []);
   return (
     <section className="booking-container" aria-labelledby="booking">
       <h2 className="booking-title">Book Your Reservation</h2>
@@ -88,6 +87,7 @@ const Booking = () => {
                   id="date"
                   name="date"
                   className="input-field"
+                  value={date}
                   min={today}
                   onChange={updateTimes}
                 />
@@ -101,11 +101,15 @@ const Booking = () => {
                   name="time"
                   className="input-field"
                 >
-                  {timeOptions.map((time) => (
-                    <option key={time} value={time}>
-                      {time}
-                    </option>
-                  ))}
+                  {timeOptions.length > 0 ? (
+                    timeOptions.map((time) => (
+                      <option key={time} value={time}>
+                        {time}
+                      </option>
+                    ))
+                  ) : (
+                    <option disabled>No available times</option>
+                  )}
                 </Field>
               </div>
             </div>
