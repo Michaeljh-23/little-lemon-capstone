@@ -34,24 +34,33 @@ const Testimonials = () => {
   ];
 
   return (
-    <div className="container h-large btm-padding-xl top-padding-lg">
+    <div
+      className="container h-large top-padding-lg"
+      aria-labelledby="testimonials"
+    >
       <div>
         <h3>Testimonials</h3>
-        <div className="cards-grid-lg">
-          {testimonialData.map((data) => {
+        <div className="cards-grid-lg" role="list">
+          {testimonialData.map((data, i) => {
             return (
-              <div className="card center-flex-col card-padding">
+              <article key={i} className="card center-flex-col card-padding">
                 <div>
-                  <img src={data.imageSrc} className="selfie" />
+                  <img
+                    src={data.imageSrc}
+                    className="selfie"
+                    alt={data.name + " profile"}
+                  />
                 </div>
                 <div>
-                  <h3>{data.name}</h3>
+                  <h3 id={`testimonial-${data.name}`}>{data.name}</h3>
                 </div>
                 <div>
-                  <p className="quote regular-size">"{data.quote}"</p>
+                  <blockquote className="quote regular-size">
+                    "{data.quote}"
+                  </blockquote>
                 </div>
-                <img src="rating.png" className="rating" />
-              </div>
+                <img src="rating.png" className="rating" alt="rating" />
+              </article>
             );
           })}
         </div>

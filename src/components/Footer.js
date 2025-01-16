@@ -1,16 +1,24 @@
 import { NavLink } from "react-router-dom";
+import { useAlert } from "../contexts/AlertContext";
 
 const Footer = () => {
+  const { openAlert, srollToTop } = useAlert();
+
   return (
-    <footer className="footer green">
+    <footer className="footer green" aria-labelledby="footer">
       <div className="footer-content">
         <div className="footer-logo">
-          <img src="logo-footer-white.png" alt="Logo" />
+          <img src="logo-footer-white.png" alt="Little Lemon Logo" />
         </div>
         <div className="footer-links">
           <ul>
             <li>
-              <NavLink to="/" className="" activeClassName="active">
+              <NavLink
+                to="/"
+                className=""
+                activeClassName="active"
+                onClick={srollToTop}
+              >
                 Home
               </NavLink>
             </li>
@@ -30,9 +38,13 @@ const Footer = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/#orderonline" className="" activeClassName="active">
-                Order Online
-              </NavLink>
+              <div
+                role="button"
+                onClick={() => openAlert(false)}
+                className="footer-links"
+              >
+                <p className="mp-none">Order Online</p>
+              </div>
             </li>
           </ul>
         </div>

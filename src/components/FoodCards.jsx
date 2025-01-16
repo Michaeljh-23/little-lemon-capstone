@@ -1,10 +1,9 @@
+import { useAlert } from "../contexts/AlertContext";
 import Card from "./Card";
 
 const FoodCards = () => {
-  function openAlert() {
-    const alertContainer = document.getElementById("alert-container");
-    alertContainer.classList.add("visible");
-  }
+  const { openAlert } = useAlert();
+
   const foodData = [
     {
       itemName: "Greek Salad",
@@ -12,6 +11,7 @@ const FoodCards = () => {
       description:
         "A Greek salad with fresh mix of cucumbers, tomatoes, olives, red onions, and feta cheese, dressed with olive oil and herbs.",
       imgSrc: "greeksalad.jpg",
+      altText: "greek salad card",
     },
     {
       itemName: "Bruchetta",
@@ -19,6 +19,7 @@ const FoodCards = () => {
       description:
         "A toasted baguette topped with a blend of diced tomatoes, garlic, basil, and olive oil.",
       imgSrc: "bruchetta.svg",
+      altText: "bruchetta card",
     },
     {
       itemName: "Lemon Cake",
@@ -26,6 +27,7 @@ const FoodCards = () => {
       description:
         "A light, zesty cake with a tangy lemon flavor, often topped with a sweet glaze.",
       imgSrc: "lemondessert.jpg",
+      altText: "lemon cake card",
     },
   ];
 
@@ -33,7 +35,7 @@ const FoodCards = () => {
     <div className="container top-padding-xl btm-padding-xl" id="menu">
       <div className="flex-between">
         <h3>Featured Menu Items</h3>
-        <button onClick={openAlert}>Full Menu</button>
+        <button onClick={() => openAlert(false)}>Full Menu</button>
       </div>
       <div className="cards-grid">
         {foodData.map((foodItem) => (

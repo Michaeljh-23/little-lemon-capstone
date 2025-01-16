@@ -12,25 +12,28 @@ body {
   margin: 0;
   padding: 0;
 }
+h1,
+h2,
+h3,
+p,
+a,
+label {
+  font-family: "Markazi Text", serif;
+  font-optical-sizing: auto;
+}
 
 h1 {
-  font-family: "Markazi Text", serif;
   font-weight: 500;
-  font-optical-sizing: auto;
   font-size: 40pt;
   /* line-height: 32px; */
 }
 
 h2 {
-  font-family: "Markazi Text", serif;
   font-weight: 500;
-  font-optical-sizing: auto;
   font-size: 36pt;
 }
 
 h3 {
-  font-family: "Markazi Text", serif;
-  font-optical-sizing: auto;
   font-size: 2rem;
   font-weight: 500;
   font-style: normal;
@@ -38,7 +41,6 @@ h3 {
 
 p {
   font-family: "Karla", serif;
-  font-optical-sizing: auto;
   font-size: 14pt;
   font-weight: 400;
   font-style: normal;
@@ -52,17 +54,21 @@ header {
   padding-top: 8px;
   padding-bottom: 8px;
 }
-header a {
-  font-family: "Markazi Text", serif;
-  font-optical-sizing: auto;
+header a,
+header p {
   font-size: larger;
   font-weight: 500;
   font-style: normal;
   text-decoration: none;
+  font-family: "Markazi Text", serif;
+  font-optical-sizing: auto;
 }
-header a:hover {
+header a:hover,
+header p:hover {
   text-decoration: underline;
   font-weight: 600;
+  font-family: "Markazi Text", serif;
+  font-optical-sizing: auto;
 }
 
 li {
@@ -163,9 +169,11 @@ footer a {
 
 .nav {
   grid-column: span 7;
+  grid-column-end: 13;
   display: flex;
   justify-content: flex-end;
   padding-right: 10px;
+  width: 100%;
 }
 .nav-list {
   display: flex;
@@ -268,6 +276,10 @@ footer a {
 .m-auto {
   margin: auto;
 }
+.mp-none {
+  margin: 0 !important;
+  padding: 0 !important;
+}
 .card-padding {
   padding: 6px;
 }
@@ -312,6 +324,26 @@ img {
   padding-top: 12px;
 }
 
+.delivery {
+  width: 33px !important;
+  height: auto !important;
+  object-fit: cover;
+  margin-left: 6px;
+  fill: #495e57;
+  stroke: #495e57;
+}
+.order-container {
+  margin-top: auto;
+  padding-left: 6px;
+  padding-bottom: 12px;
+  color: #495e57;
+  text-decoration: none;
+}
+.order-container:hover {
+  text-decoration: underline;
+  color: #000;
+}
+
 /* //? Color Options*/
 .green-text {
   color: #495e57;
@@ -344,7 +376,7 @@ img {
 /* //? Group Specific */
 .card {
   border: 1px solid #000;
-  border-radius: 8px;
+  border-radius: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -457,13 +489,15 @@ img {
   margin-bottom: 10px;
 }
 
-.footer-links a {
+.footer-links a,
+.footer-links p {
   text-decoration: none;
   color: #fff;
   transition: color 0.3s;
 }
 
-.footer-links a:hover {
+.footer-links a:hover,
+.footer-links p:hover {
   color: #f4ce14;
   text-decoration: underline;
 }
@@ -592,7 +626,7 @@ img {
 }
 
 .alert-content p {
-  margin-bottom: 20px;
+  margin-bottom: 80px;
 }
 
 .alert-content {
@@ -602,10 +636,12 @@ img {
   flex-direction: column;
   font-family: "Karla", serif;
   text-align: center;
+  border: #495e57 4px dotted;
 }
 
 .close-btn {
   margin-left: auto;
+  margin-bottom: 30px;
   background: transparent;
   border: none;
   font-size: 3rem;
@@ -624,5 +660,188 @@ img {
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+}
+
+.hamburger {
+  display: none;
+}
+/* //? Responsive Design */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .grid-container,
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 10px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .card {
+    /* padding: 8px; */
+    flex-direction: column;
+
+    max-width: 400px;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .flex-between {
+    /* flex-direction: column;
+    align-items: flex-start; */
+    gap: 24px;
+  }
+
+  .order-container {
+    gap: 8px;
+    text-align: center;
+  }
+  .top-padding-lg {
+    padding-top: 1rem;
+  }
+
+  .cards-grid-lg {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .quote {
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+  }
+
+  .selfie {
+    width: 80px;
+    height: 80px;
+  }
+
+  .rating {
+    width: 100px !important;
+  }
+
+  .card h3 {
+    font-size: 1.5rem;
+  }
+
+  .regular-size {
+    font-size: 0.95rem;
+  }
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .top-padding-lg {
+    padding-top: 1rem;
+  }
+
+  .btm-padding-xl {
+    padding-bottom: 1.5rem;
+  }
+
+  .lineh-lg {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .split-img-column {
+    display: grid;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .split-img-one,
+  .split-img-two {
+    position: relative;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+  .nav {
+    align-items: center;
+  }
+  .nav-list {
+    display: none;
+  }
+  .hamburger {
+    display: block;
+    width: 40px;
+  }
+  /* Ensuring the right image is taller */
+  .split-img-one {
+    /* height: 100%; */
+    /* object-position: center; */
+    grid-column: span 2;
+  }
+  .mobile-nav {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .mobile-nav a {
+    font-size: 36pt;
+  }
+  .footer-logo img {
+    max-width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 8px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  p,
+  a,
+  label {
+    font-size: 0.9rem;
+  }
+
+  .footer-content {
+    gap: 10px;
+  }
+
+  .footer a,
+  .footer p {
+    font-size: 0.8rem;
   }
 }

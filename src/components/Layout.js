@@ -1,13 +1,9 @@
 import React from "react";
-import Nav from "./Nav";
 
 const Layout = ({ children }) => {
-  // console.log(children);
+  //TODO loading
   return (
-    <main>
-      {/* <Nav /> */}
-      {children ? <div className="content">{children}</div> : <></>}
-    </main>
+    <main>{children ? <div className="content">{children}</div> : <></>}</main>
   );
 };
 

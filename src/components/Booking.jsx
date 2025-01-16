@@ -16,15 +16,25 @@ const Booking = () => {
   const handleSubmit = (values) => {
     setSubmitted(true);
   };
+  const generateTimeOptions = () => {
+    return Array.from({ length: 24 * 4 }, (_, i) => {
+      const hour = String(Math.floor(i / 4)).padStart(2, "0");
+      const minutes = String((i % 4) * 15).padStart(2, "0");
+      return `${hour}:${minutes}`;
+    });
+  };
 
-  const timeOptions = Array.from({ length: 24 * 4 }, (_, i) => {
-    const hour = String(Math.floor(i / 4)).padStart(2, "0");
-    const minutes = String((i % 4) * 15).padStart(2, "0");
-    return `${hour}:${minutes}`;
-  });
+  const [timeOptions, setTimeOptions] = useState(generateTimeOptions());
+
+  const updateTimes = () => {
+    const randomSubset = timeOptions.filter(() => Math.random() > 0.5);
+    setTimeOptions(
+      randomSubset.length > 0 ? randomSubset : generateTimeOptions()
+    );
+  };
 
   return (
-    <section className="booking-container">
+    <section className="booking-container" aria-labelledby="booking">
       <h2 className="booking-title">Book Your Reservation</h2>
       <Formik
         initialValues={formData}
@@ -38,93 +48,106 @@ const Booking = () => {
           return errors;
         }}
       >
-        <Form className="booking-form">
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <Field type="text" id="name" name="name" className="input-field" />
-            <ErrorMessage
-              name="name"
-              component="div"
-              className="error-message"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <Field
-              type="email"
-              id="email"
-              name="email"
-              className="input-field"
-            />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className="error-message"
-            />
-          </div>
-
-          <div className="form-group date-time-group">
-            <div className="date-group">
-              <label htmlFor="date">Date</label>
+        {({ values, setFieldValue }) => (
+          <Form className="booking-form">
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
               <Field
-                type="date"
-                id="date"
-                name="date"
+                type="text"
+                id="name"
+                name="name"
                 className="input-field"
-                min={today}
+              />
+              <ErrorMessage
+                name="name"
+                component="div"
+                className="error-message"
               />
             </div>
 
-            <div className="time-group">
-              <label htmlFor="time">Time</label>
-              <Field as="select" id="time" name="time" className="input-field">
-                {timeOptions.map((time) => (
-                  <option key={time} value={time}>
-                    {time}
-                  </option>
-                ))}
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <Field
+                type="email"
+                id="email"
+                name="email"
+                className="input-field"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="error-message"
+              />
+            </div>
+
+            <div className="form-group date-time-group">
+              <div className="date-group">
+                <label htmlFor="date">Date</label>
+                <Field
+                  type="date"
+                  id="date"
+                  name="date"
+                  className="input-field"
+                  min={today}
+                  onChange={updateTimes}
+                />
+              </div>
+
+              <div className="time-group">
+                <label htmlFor="time">Time</label>
+                <Field
+                  as="select"
+                  id="time"
+                  name="time"
+                  className="input-field"
+                >
+                  {timeOptions.map((time) => (
+                    <option key={time} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </Field>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="guests">Number of Guests</label>
+              <Field
+                type="number"
+                id="guests"
+                name="guests"
+                min="1"
+                className="input-field"
+              />
+              <ErrorMessage
+                name="guests"
+                component="div"
+                className="error-message"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="occasion">Occasion (Optional)</label>
+              <Field
+                as="select"
+                id="occasion"
+                name="occasion"
+                className="input-field"
+              >
+                <option value="">Select an Occasion</option>
+                <option value="birthday">Birthday</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="celebration">Celebration</option>
               </Field>
             </div>
-          </div>
 
-          <div className="form-group">
-            <label htmlFor="guests">Number of Guests</label>
-            <Field
-              type="number"
-              id="guests"
-              name="guests"
-              min="1"
-              className="input-field"
-            />
-            <ErrorMessage
-              name="guests"
-              component="div"
-              className="error-message"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="occasion">Occasion (Optional)</label>
-            <Field
-              as="select"
-              id="occasion"
-              name="occasion"
-              className="input-field"
-            >
-              <option value="">Select an Occasion</option>
-              <option value="birthday">Birthday</option>
-              <option value="anniversary">Anniversary</option>
-              <option value="celebration">Celebration</option>
-            </Field>
-          </div>
-
-          <div className="form-group">
-            <button type="submit" disabled={submitted}>
-              {!submitted ? "Book Now" : "Can't wait to see you!"}
-            </button>
-          </div>
-        </Form>
+            <div className="form-group">
+              <button type="submit" disabled={submitted}>
+                {!submitted ? "Book Now" : "Can't wait to see you!"}
+              </button>
+            </div>
+          </Form>
+        )}
       </Formik>
     </section>
   );

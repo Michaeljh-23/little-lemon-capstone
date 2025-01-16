@@ -1,6 +1,9 @@
 const ResyHero = () => {
   return (
-    <section className="grid-container cards-grid h-large btm-padding-xl top-padding-lg white-text">
+    <section
+      className="grid-container cards-grid h-large btm-padding-xl top-padding-lg white-text"
+      aria-labelledby="Welcome to Little Lemon"
+    >
       <div className="two-cols flex-col">
         <div>
           <h2>Reservations Available</h2>
@@ -40,7 +43,7 @@ const ResyHero = () => {
         </div>
       </div>
       <div className="m-auto">
-        <img src="chef.jpg" className="" alt="Large image" />
+        <img src="chef.jpg" className="" alt="chef" />
       </div>
     </section>
   );

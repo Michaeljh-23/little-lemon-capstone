@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import AlertDialougue from "./AlertDialogue";
+import { useAlert } from "../contexts/AlertContext.js";
 
 const Nav = () => {
-  const location = useLocation();
+  const { openAlert } = useAlert();
 
-  function openAlert() {
-    const alertContainer = document.getElementById("alert-container");
-    alertContainer.classList.add("visible");
-  }
+  const location = useLocation();
 
   useEffect(() => {
     if (location.hash) {
@@ -20,6 +17,7 @@ const Nav = () => {
       }
     }
   }, [location]);
+
   return (
     <nav className="nav">
       <ul className="nav-list">
@@ -48,17 +46,14 @@ const Nav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink
-            to="/#orderonline"
-            className="green-text"
-            activeClassName="active"
-            onClick={openAlert}
-          >
+          <p className="green-text mp-none" onClick={() => openAlert(false)}>
             Order Online
-          </NavLink>
+          </p>
         </li>
       </ul>
-      <AlertDialougue />
+      <div className="hamburger" onClick={() => openAlert(true)}>
+        <img src="hamburger.svg" alt="hamburger menu" />
+      </div>
     </nav>
   );
 };

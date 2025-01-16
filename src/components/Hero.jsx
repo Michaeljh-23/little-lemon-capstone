@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 
 const Hero = () => {
   return (
-    <div class="grid-container top-padding-lg">
+    <div class="grid-container y-padding-lg">
       <div class="image-column">
         <img src="restaurant.jpg" alt="Interior" className="center-img" />
       </div>

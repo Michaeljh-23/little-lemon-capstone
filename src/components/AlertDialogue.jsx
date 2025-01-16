@@ -1,20 +1,75 @@
+import React from "react";
+import { useAlert } from "../contexts/AlertContext";
+import { NavLink } from "react-router";
+
 const AlertDialougue = () => {
-  function closeAlert() {
-    const alertContainer = document.getElementById("alert-container");
-    alertContainer.classList.remove("visible");
-  }
+  const { isAlertVisible, isMobileView, closeAlert } = useAlert();
+
   return (
-    <div class="alert-dialog" id="alert-container">
-      <div class="alert-content">
-        <button class="close-btn" onClick={closeAlert}>
+    <div
+      className={`alert-dialog ${isAlertVisible ? "visible" : ""} ${
+        isMobileView ? "mobile" : ""
+      }`}
+      role="dialog"
+      id="alert-container"
+      aria-hidden={!isAlertVisible}
+    >
+      <div className="alert-content">
+        <button className="close-btn" onClick={closeAlert} aria-label="Close">
           ×
         </button>
-        <p>
-          This page doesn’t exist and is not in the current project scope. Check
-          back later!
-        </p>
+        {isMobileView ? (
+          <ul className="mobile-nav">
+            <li>
+              <NavLink
+                to="/#hero"
+                className="green-text"
+                activeClassName="active"
+                onClick={closeAlert}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/#about"
+                className="green-text"
+                activeClassName="active"
+                onClick={closeAlert}
+              >
+                About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/#menu"
+                className="green-text"
+                activeClassName="active"
+                onClick={closeAlert}
+              >
+                Menu
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/booking"
+                className="green-text"
+                activeClassName="active"
+                onClick={closeAlert}
+              >
+                Reservations
+              </NavLink>
+            </li>
+          </ul>
+        ) : (
+          <p>
+            This page doesn’t exist and is not in the current project scope.
+            Check back later!
+          </p>
+        )}
       </div>
     </div>
   );
 };
+
 export default AlertDialougue;

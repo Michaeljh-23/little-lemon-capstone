@@ -20,11 +20,11 @@ const About = () => {
         </div>
       </div>
       <div className="split-img-column">
-        <img src="maa.jpg" className="split-img-one" alt="Large image" />
+        <img src="maa.jpg" className="split-img-one" alt="Large foh" />
         <img
           src="restauranfood.jpg"
           className="split-img-two"
-          alt="Small overlay image"
+          alt=" bruchetta"
         />
       </div>
     </div>

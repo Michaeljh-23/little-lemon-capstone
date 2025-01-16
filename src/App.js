@@ -6,19 +6,24 @@ import Layout from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
+import AlertDialougue from "./components/AlertDialogue";
+import { AlertProvider } from "./contexts/AlertContext";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/booking" element={<BookingPage />} />
-        </Routes>
-      </Layout>
-      <Footer />
-    </div>
+    <AlertProvider>
+      <div className="App">
+        <Header />
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/booking" element={<BookingPage />} />
+          </Routes>
+        </Layout>
+        <Footer />
+        <AlertDialougue />
+      </div>
+    </AlertProvider>
   );
 }
 
